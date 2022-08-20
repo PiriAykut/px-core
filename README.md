@@ -7,6 +7,7 @@
 ## javascript - jquery
 > require('px-jquery-wait');
 > require('px-core');
+> core.default_root = "api"; //**optional** first segment to be used in each request eg api/... 
 
 ### use
 > - core.run("request_url", {params}, { form: "#formid or class - optional",  waittext: "message to show until ajax result comes" }, function(e, err){ //e = data block returned as ajax result }); <br>
