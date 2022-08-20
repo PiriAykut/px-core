@@ -5,8 +5,8 @@
 > npm i px-core
 
 ## javascript - jquery
-> require('px-jquery-wait');
-> require('px-core');
+> require('px-jquery-wait'); <br>
+> require('px-core'); <br>
 > core.default_root = "api"; //**optional** first segment to be used in each request eg api/... 
 
 ### use
