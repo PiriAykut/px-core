@@ -1,0 +1,35 @@
+{
+  "name": "px-core",
+  "version": "1.0.0",
+  "description": "px-core offers many short uses to make javascript easy to use. For example, it includes ajax, crypto, search, insert, delete and sort in json, Array and String prototypes, input - replace and focus events, and many utilities.",
+  "main": "core.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PiriAykut/px-core.git"
+  },
+  "keywords": [
+    "px",
+    "core",
+    "javascript methods",
+    "javascript utils",
+    "ajax short usage",
+    "jquery",
+    "javascript",
+    "crypt",
+    "jquery events",
+    "prototype",
+    "property"
+  ],
+  "author": "Piri AYKUT <piriaykut@gmail.com> - <piriaykut@hotmail.com> - https://www.linkedin.com/in/piri-aykut-ba395b70/",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/PiriAykut/px-core/issues"
+  },
+  "homepage": "https://github.com/PiriAykut/px-core#readme"
+}

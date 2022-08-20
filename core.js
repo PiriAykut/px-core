@@ -27,6 +27,8 @@ export class Core {
         this.j = this.json;
         this.e = this.events;
 
+        this.default_root = "";
+
         this.gtoken = "";
         this.gtoken_secretkey = "";
 
@@ -164,7 +166,7 @@ export class Core {
 
         var defaults = {
             progress: null, //(percent) or (complated, total) or (complated, total, percent) or ()
-            root: "api",
+            root: this.default_root,
             request: "",
             paramURL: null, // p1=adc&p2=123
             param: null, //{p1: '', p2: ''}
@@ -282,7 +284,7 @@ export class Core {
             type: _mod,
             contentType: false,
             processData: false,
-            url: core.rooturl + "/" + options.root + "/" + (core.prefix != "" ? core.prefix + (core.prefix.substr(-1) != "/" ? "/" : "") : "") + options.request,
+            url: core.rooturl + "/" + (options.root != "" ? options.root + "/" : "") + (core.prefix != "" ? core.prefix + (core.prefix.substr(-1) != "/" ? "/" : "") : "") + options.request,
             data: coreFormData,
             timeout: options.timeout,
             xhr: function () {
@@ -442,7 +444,7 @@ export class Core {
             pxwait.show({ message: options.waittext, panelshow: false, /*spinlevel: '3',*/  ajaxobj: AJX });
         }
     };
-    
+
     showModal(options, callback) {
         var defaultOption = {
             modal: "",
