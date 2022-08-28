@@ -897,13 +897,13 @@ export class CoreUtilities {
                 swal.fire({
                     title: ptitle,
                     html: '<div style="float:left;width:100%;max-height:200px;overflow:auto;font-size:15px;' + (style !== undefined && style !== null && style !== "" ? style : '') + '">' + pmessage + '</div>',
-                    type: 'question',
+                    icon: 'question',
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
                     confirmButtonText: '<i class="fa fa-check"></i> Evet',
                     cancelButtonText: '<i class="fa fa-remove"></i> Hayır',
-                    confirmButtonClass: 'swalbtn btn btn-outline-success ml-2',
-                    cancelButtonClass: 'swalbtn btn btn-outline-danger',
+                    // confirmButtonClass: 'swalbtn btn btn-outline-success ml-2',
+                    // cancelButtonClass: 'swalbtn btn btn-outline-danger',
                     showCancelButton: true,
                     buttonsStyling: false,
                     reverseButtons: true
@@ -925,9 +925,9 @@ export class CoreUtilities {
                 swal.fire({
                     title: ptitle,
                     html: '<div style="float:left; width:100%; max-height:200px; overflow:auto; font-size:15px; ' + (style !== undefined && style !== null && style !== "" ? style : '') + '">' + pmessage + '</div>',
-                    type: ptype,
+                    icon: ptype,
                     confirmButtonText: 'Tamam',
-                    confirmButtonClass: 'swalbtn btn btn-success'
+                    // confirmButtonClass: 'swalbtn btn btn-success'
                 }).then(function (result) {
                     if (!core.u.isnull(callback)) {
                         switch (callback.length) {
