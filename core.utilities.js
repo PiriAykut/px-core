@@ -898,15 +898,15 @@ export class CoreUtilities {
                     title: ptitle,
                     html: '<div style="float:left;width:100%;max-height:200px;overflow:auto;font-size:15px;' + (style !== undefined && style !== null && style !== "" ? style : '') + '">' + pmessage + '</div>',
                     icon: 'question',
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
+                    // confirmButtonColor: '#3085d6',
+                    // cancelButtonColor: '#d33',
                     confirmButtonText: '<i class="fa fa-check"></i> Evet',
                     cancelButtonText: '<i class="fa fa-remove"></i> Hayır',
                     // confirmButtonClass: 'swalbtn btn btn-outline-success ml-2',
                     // cancelButtonClass: 'swalbtn btn btn-outline-danger',
-                    showCancelButton: true,
-                    buttonsStyling: false,
-                    reverseButtons: true
+                    showCancelButton: true
+                    // buttonsStyling: false,
+                    // reverseButtons: true
                 }).then(function (result) {
                     if (!core.u.isnull(callback)) {
                         switch (callback.length) {
