@@ -5,7 +5,7 @@
     https://www.linkedin.com/in/piri-aykut-ba395b70/
  */
 
-require('./core.property.js');
+import './core.property.js';
 
 import { CoreEvents } from './core.events.js';
 import { CoreUtilities } from './core.utilities.js';
