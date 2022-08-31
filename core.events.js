@@ -1,11 +1,10 @@
-/* 
-    core.events
-    20.08.2022
-    Piri AYKUT - piriaykut@gmail.com
-    https://www.linkedin.com/in/piri-aykut-ba395b70/
+/*
+ core.events
+ 20.12.2017
+ Piri AYKUT
  */
 
-export class CoreEvents {
+ export class CoreEvents {
     constructor() {
         this.events();
 
@@ -23,28 +22,8 @@ export class CoreEvents {
             // .on("blur", "input[autocomplete='off']", function () {
             //     $(this).attr("readonly");
             // })
-            .on("change", ".moneyonly", function () {
-                if ($(this).val().trim().length > 0) {
-                    let add = $(this).val().indexOf(",") == -1;
-                    let t = "";
-                    let d = "";
 
-                    if (!add) {
-                        let p = $(this).val().split(",");
-                        t = p[0].replaceAll(".", "");
-                        if (t === "") t = "0";
-                        d = p[1];
-                    } else {
-                        t = $(this).val().replaceAll(".", "");
-                        d = "00";
-                    }
-
-                    let money = t + "," + d;
-                    $(this).attr("data-val", money.toString().replace(",", ".")).val(core.u.moneyformat(money));
-                } else {
-                    $(this).attr("data-val", "0.00").val("0,00");
-                }
-            }).on("input", ".core-filter", function () {
+            .on("input", ".core-filter", function () {
                 core.u.html_filter($(this).attr("data-container"), $(this).attr("data-item"), $(this).val());
             }).on("input", ".input-filter", function () {
                 let cont = $(this).attr("data-container");
@@ -114,7 +93,7 @@ export class CoreEvents {
                 $(this).select();
             }).on("input", ".firstupper", function (e) {
                 if ($(this).val().length == 1) {
-                    $(this).val($(this).val().toTrUpperCase());
+                    $(this).val($(this).val().toFirstUpperCase());
                 }
             }).on("input", ".upper", function (e) {
                 //sadece küçük harflerde çalış
@@ -126,17 +105,22 @@ export class CoreEvents {
                 //if ((e.keyCode >= 97 && e.keyCode <= 122) || (e.keyCode >= 65 && e.keyCode <= 90) || "Ç,Ş,Ğ,Ü,Ö,İ,Ə,".indexOf(e.key + ",") > -1) {
                 $(this).val($(this).val().toTrLowerCase());
                 //}
-            }).on("keypress", ".moneyonly", function (event) {
-                var keyCode = event.which;
-                if (keyCode > 0 && (keyCode < 48 || keyCode > 57)) {
-                    if ("|8|46|44|".indexOf("|" + keyCode + "|") === -1 && "|37|39|".indexOf("|" + keyCode + "|") === -1) {
-                        event.preventDefault();
-                    }
+            }).on("change", ".moneyonly", function () {
+                var dHane = $(this).attr("decimalcount");
+                if (dHane === undefined) {
+                    dHane = 2;
+                } else {
+                    dHane = parseInt(dHane);
                 }
 
-                return;
-                var desAscii = (core.u.decimalChr === "," ? 46 : 44); //"," : "."
-                var controlAscii = (core.u.decimalChr === "," ? 44 : 46); //"." : ","
+                if ($(this).val() !== "")
+                    $(this).val(accounting.formatMoney($(this).val(), "", dHane, core.u.tousendChr, core.u.decimalChr));
+                else
+                    $(this).html(accounting.formatMoney($(this).html(), "", dHane, core.u.tousendChr, core.u.decimalChr));
+
+            }).on("keypress", ".moneyonly", function (event) {
+                var desAscii = (core.u.decimalChr === "," ? 44 : 46); //"," : "."
+                var controlAscii = (core.u.decimalChr === "," ? 46 : 44); //"." : ","
 
                 var keyCode = event.which;
 
@@ -161,8 +145,6 @@ export class CoreEvents {
                         event.preventDefault();
                     }
                 }
-
-
             }).on("keypress", ".numericonly", function (event) {
                 var keyCode = event.which;
                 if (keyCode > 0 && (keyCode < 48 || keyCode > 57)) {
@@ -178,14 +160,34 @@ export class CoreEvents {
                 for (var i = 0; i < $(this).val().length; i++) {
                     chr = $(this).val().substr(i, 1);
                     ascii = chr.charCodeAt(0);
-                    //console.log(chr + " => " + ascii);
+                    
                     if ((ascii >= 48 && ascii <= 57) || ascii == 46) {
                         str += chr;
                     }
                 }
 
                 $(this).val(str);
+            }).on("keypress", ".moneyonly", function (event) {
+                var keyCode = event.which;
+                if (keyCode > 0 && (keyCode < 48 || keyCode > 57)) {
+                    if ("|8|46|".indexOf("|" + keyCode + "|") === -1 && "|37|39|".indexOf("|" + keyCode + "|") === -1) {
+                        event.preventDefault();
+                    }
+                }
+            }).on("change", ".moneyonly", function () {
+                var str = "";
+                var chr = "";
+                var ascii;
 
+                for (var i = 0; i < $(this).val().length; i++) {
+                    chr = $(this).val().substr(i, 1);
+                    ascii = chr.charCodeAt(0);
+                    if ((ascii >= 48 && ascii <= 57) || ascii == 46) {
+                        str += chr;
+                    }
+                }
+
+                $(this).val(str);
             }).on("click", ".clearselectdata", function () {
                 var owner = $(this);
                 do {
@@ -265,9 +267,7 @@ export class CoreEvents {
                         indx++;
                     });
                 }
-            }).on("click", "[data-dismiss='modal']", function () {
-                $(this).parents(".modal").modal("hide");
-            })
+            });
 
         //extras
         $(document).keydown(function (event) {
@@ -285,26 +285,32 @@ export class CoreEvents {
 
                 entries.forEach(entry => {
                     if (entry.intersectionRatio > 0) {
+
                         const _target = entry.target;
 
                         if ($(_target).is('picture')) {
-                            let source = $(_target).find('[data-lazy]');
+                            //let _image = $(_target).attr('data-lazy');
+                            
+                            let source = $(_target).children(); //find('[data-item]');
 
                             source.each(function () {
-                                if ($(this).is('source')) {
-                                    $(this).attr('srcset', $(this).attr('data-lazy'));
-                                } else {
-                                    $(this).attr('src', $(this).attr('data-lazy'));
+                                if ($(this).is('source') && $(this).attr('data-srcset') != undefined) {
+                                    $(this).attr('srcset', $(this).attr('data-srcset')).removeAttr("data-srcset");                                    
+                                    //$(this).attr('srcset', _image + ($(this).attr("type") == "image/webp" ? ".webp" : ""));
                                 }
-                                $(this).removeAttr('data-lazy')
+                                // else if ($(this).is('img')) {
+                                //     $(this).attr('src', _image);
+                                // }
                             });
+
+                            $(this).removeAttr('data-lazy');
                         } else {
                             switch ($(_target).attr('data-lazy')) {
                                 case "number":
                                     core_number_say($(_target), 0, parseInt($(_target).attr('data-number')));
                                     break;
                                 case "appointment":
-                                    app.loader.load_appointment($(_target).attr("data-doctorid"));
+                                    eval('app.loader.load_appointment($(_target).attr("data-doctorid"));')
                                     break;
                                 default:
                                     if ($(_target).attr("onerror") == undefined) {
