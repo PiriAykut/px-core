@@ -1115,6 +1115,43 @@ export class CoreUtilities {
         today = dd + ayrac + mm + ayrac + yyyy + (addTime === true ? " " + HH + ":" + MI : "");
         return today;
     };
+    getTextToDate(_datestr) {
+        let rv = new Date();
+        let _date = "";
+        let _time = "";
+
+        if (_datestr.indexOf(" ") > -1) {
+            let _datetime = _datestr.split(" ");
+            rv = new Date();
+            _date = _datetime[0];
+            _time = _datetime[1];
+        } else {
+            _date = _datestr;
+        }
+
+        let p = [];
+
+        if (_date.indexOf(".") > -1) {
+            p = _date.split(".");
+        } else if (_date.indexOf("-") > -1) {
+            p = _date.split("-");
+        } else if (_date.indexOf("/") > -1) {
+            p = _date.split("/");
+        }
+
+        let t = null;
+        if (_time != "") {
+            t = _time.split(":");
+        }
+
+        if (p[2].length == 4) {
+            rv = new Date(p[2], parseInt(p[1]) - 1, p[0], (t == null ? null : t[0]), (t == null ? null : t[1]), (t == null ? null : t[2]));
+        } else {
+            rv = new Date(p[0], parseInt(p[1]) - 1, p[2], (t == null ? null : t[0]), (t == null ? null : t[1]), (t == null ? null : t[2]));
+        }
+
+        return rv;
+    };
     getDateBetween(date1, date2) {
         var MS_one_day = 1000 * 60 * 60 * 24;
         date1 = Date.UTC(date1.getFullYear(), date1.getMonth(), date1.getDate());
