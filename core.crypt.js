@@ -9,18 +9,26 @@ export class CoreCRYPT {
     constructor() {
     };
 
-    en(str) {
-        var crypt = btoa(unescape(encodeURIComponent(str)));
-        var rv = "";
-        for (let i = 0; i < crypt.length; i++) {
-            rv += String.fromCharCode(crypt.charCodeAt(i) + 2);
+    en(str, crypt = true) {
+        str = btoa(unescape(encodeURIComponent(str)));
+        if (crypt) {
+            let rv = "";
+            for (let i = 0; i < str.length; i++) {
+                rv += String.fromCharCode(str.charCodeAt(i) + 2);
+            }
+            return rv;
+        } else {
+            return str;
         }
-        return rv;
     };
-    de(str) {
-        var rv = "";
-        for (let i = 0; i < str.length; i++) {
-            rv += String.fromCharCode(str.charCodeAt(i) - 2);
+    de(str, crypted = true) {
+        let rv = "";
+        if (crypted) {
+            for (let i = 0; i < str.length; i++) {
+                rv += String.fromCharCode(str.charCodeAt(i) - 2);
+            }
+        } else {
+            rv = str;
         }
         return decodeURIComponent(escape(atob(rv)));
     };
@@ -34,35 +42,35 @@ export class CoreCRYPT {
     }
 
     sha1(string) {
-        var rotateLeft = function(lValue, iShiftBits) {
+        var rotateLeft = function (lValue, iShiftBits) {
             return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits));
         }
-    
-        var lsbHex = function(value) {
+
+        var lsbHex = function (value) {
             var string = "";
             var i;
             var vh;
             var vl;
-            for(i = 0;i <= 6;i += 2) {
-                vh = (value>>>(i * 4 + 4))&0x0f;
-                vl = (value>>>(i*4))&0x0f;
+            for (i = 0; i <= 6; i += 2) {
+                vh = (value >>> (i * 4 + 4)) & 0x0f;
+                vl = (value >>> (i * 4)) & 0x0f;
                 string += vh.toString(16) + vl.toString(16);
             }
             return string;
         };
-    
-        var cvtHex = function(value) {
+
+        var cvtHex = function (value) {
             var string = "";
             var i;
             var v;
-            for(i = 7;i >= 0;i--) {
-                v = (value>>>(i * 4))&0x0f;
+            for (i = 7; i >= 0; i--) {
+                v = (value >>> (i * 4)) & 0x0f;
                 string += v.toString(16);
             }
             return string;
         };
-    
-        var uTF8Encode = function(string) {
+
+        var uTF8Encode = function (string) {
             string = string.replace(/\x0d\x0a/g, "\x0a");
             var output = "";
             for (var n = 0; n < string.length; n++) {
