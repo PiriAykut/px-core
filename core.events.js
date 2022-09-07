@@ -303,7 +303,7 @@
                                 // }
                             });
 
-                            $(this).removeAttr('data-lazy');
+                            $(_target).removeAttr('data-lazy');
                         } else {
                             switch ($(_target).attr('data-lazy')) {
                                 case "number":
