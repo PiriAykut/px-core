@@ -4,7 +4,7 @@
  Piri AYKUT
  */
 
- export class CoreEvents {
+export class CoreEvents {
     constructor() {
         this.events();
 
@@ -147,10 +147,22 @@
                 }
             }).on("keypress", ".numericonly", function (event) {
                 var keyCode = event.which;
+                //console.log(keyCode);
+
                 if (keyCode > 0 && (keyCode < 48 || keyCode > 57)) {
-                    if ("|8|46|".indexOf("|" + keyCode + "|") === -1 && "|37|39|".indexOf("|" + keyCode + "|") === -1) {
+                    if ("|44|46|".indexOf("|" + keyCode + "|") > -1) {
+                        if ($(this).val().indexOf(".") == -1) {
+                            $(this).val($(this).val() + ".");
+                        }
+
+                        event.preventDefault();
+                    } else if ("|8|37|39|".indexOf("|" + keyCode + "|") === -1) {
                         event.preventDefault();
                     }
+                }
+            }).on("focusout", ".numericonly", function () {
+                if ($(this).val().substr(-1) == ".") {
+                    $(this).trigger("change");
                 }
             }).on("change", ".numericonly", function () {
                 var str = "";
@@ -160,10 +172,14 @@
                 for (var i = 0; i < $(this).val().length; i++) {
                     chr = $(this).val().substr(i, 1);
                     ascii = chr.charCodeAt(0);
-                    
+
                     if ((ascii >= 48 && ascii <= 57) || ascii == 46) {
                         str += chr;
                     }
+                }
+
+                if (str.substr(-1) == ".") {
+                    str += "0";
                 }
 
                 $(this).val(str);
@@ -290,12 +306,12 @@
 
                         if ($(_target).is('picture')) {
                             //let _image = $(_target).attr('data-lazy');
-                            
+
                             let source = $(_target).children(); //find('[data-item]');
 
                             source.each(function () {
                                 if ($(this).is('source') && $(this).attr('data-srcset') != undefined) {
-                                    $(this).attr('srcset', $(this).attr('data-srcset')).removeAttr("data-srcset");                                    
+                                    $(this).attr('srcset', $(this).attr('data-srcset')).removeAttr("data-srcset");
                                     //$(this).attr('srcset', _image + ($(this).attr("type") == "image/webp" ? ".webp" : ""));
                                 }
                                 // else if ($(this).is('img')) {
