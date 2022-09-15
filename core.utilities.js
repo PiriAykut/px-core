@@ -90,17 +90,17 @@ export class CoreUtilities {
                     return false;
                 }
             }
-            if (_name == "pass" || _name == "password") { // || _obj.attr("type") == "password"
-                let _passvl = $(_obj).val().trim();
-                if (!core.u.validatePassword(_passvl)) {
-                    core.u.alert(t("Uyarı"), t("Şifreniz hem harf, hem rakamlardan ve en az 5(beş) karakter oluşmalıdır!"), "warning", function () {
-                        setTimeout(() => {
-                            $(_obj).focus();
-                        }, 500);
-                    });
-                    return false;
-                }
-            }
+            // if (_name == "pass" || _name == "password") { // || _obj.attr("type") == "password"
+            //     let _passvl = $(_obj).val().trim();
+            //     if (!core.u.validatePassword(_passvl)) {
+            //         core.u.alert(t("Uyarı"), t("Şifreniz hem harf, hem rakamlardan ve en az 5(beş) karakter oluşmalıdır!"), "warning", function () {
+            //             setTimeout(() => {
+            //                 $(_obj).focus();
+            //             }, 500);
+            //         });
+            //         return false;
+            //     }
+            // }
 
         }
 
