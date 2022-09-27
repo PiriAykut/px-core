@@ -727,6 +727,18 @@ export class CoreUtilities {
         }
     }
 
+    jsontobase64(_json){
+        _json = JSON.stringify(_json);
+        _json = btoa(unescape(encodeURIComponent(_json)));
+
+        return _json;
+    }
+    base64tojson(_base64){
+        _base64 = JSON.parse(decodeURIComponent(escape(atob(_base64))));
+
+        return _base64;
+    }
+
     clipboard(_text, _message) {
         if (!this.isnull(_text) && _text != "") {
             $("body").append('<input type="text" id="clipboardtext" value="' + _text + '" style="position:fixed; left:0px; z-index:9999; top:0px; /*width:1px*/" />');
