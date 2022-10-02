@@ -270,20 +270,22 @@ export class CoreEvents {
                 $(this).removeClass('notnullvalid');
             }).on("change", ".notnullvalid", function () {
                 $(this).removeClass('notnullvalid');
-            }).on("shown.bs.modal", ".modal", function () {
-                if ($(".modal.show").length > 1) {
-                    let zindexModal = 1050;
-                    let indx = 0;
+            })
+            // .on("shown.bs.modal", ".modal", function () {
+            //     if ($(".modal.show").length > 1) {
+            //         let zindexModal = 1050;
+            //         let indx = 0;
 
-                    $(".modal.show").each(function () {
-                        $(this).css("z-index", zindexModal);
-                        $(".modal-backdrop.show:eq(" + indx + ")").css("z-index", (zindexModal - 1));
+            //         $(".modal.show").each(function () {
+            //             $(this).css("z-index", zindexModal);
+            //             $(".modal-backdrop.show:eq(" + indx + ")").css("z-index", (zindexModal - 1));
 
-                        zindexModal += 5;
-                        indx++;
-                    });
-                }
-            });
+            //             zindexModal += 5;
+            //             indx++;
+            //         });
+            //     }
+            // })
+            ;
 
         //extras
         $(document).keydown(function (event) {
