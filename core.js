@@ -176,7 +176,7 @@ export class Core {
             waittext: "",
             response_false_show_msg: false,
             errorShowMessage: false,
-            timeout: 30000,
+            timeout: ((1000 * 60) * 2), //120sn 2dk
             timeout_rerun: false,
 
             btn: null,
