@@ -15,6 +15,7 @@ import { CoreDatatable } from './core.datatable.js';
 
 export class Core {
 
+
     constructor() {
         this.events = new CoreEvents();
         this.util = new CoreUtilities();
