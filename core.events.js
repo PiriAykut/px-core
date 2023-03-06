@@ -304,7 +304,7 @@ export class CoreEvents {
                                     core_number_say($(_target), 0, parseInt($(_target).attr('data-number')));
                                     break;
                                 case "appointment":
-                                    eval('app.loader.load_appointment($(_target).attr("data-doctorid"));')
+                                    app.loader.load_appointment($(_target).attr("data-doctorid"));
                                     break;
                                 default:
                                     if ($(_target).attr("onerror") == undefined) {
