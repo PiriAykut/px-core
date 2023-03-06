@@ -48,7 +48,7 @@ export class CoreUtilities {
         }, 500);
     }
 
-    firstUpper(_text){
+    firstUpper(_text) {
         return _text.charAt(0).toLocaleUpperCase('tr-TR') + _text.slice(1);
     }
 
@@ -727,13 +727,13 @@ export class CoreUtilities {
         }
     }
 
-    jsontobase64(_json){
+    jsontobase64(_json) {
         _json = JSON.stringify(_json);
         _json = btoa(unescape(encodeURIComponent(_json)));
 
         return _json;
     }
-    base64tojson(_base64){
+    base64tojson(_base64) {
         _base64 = JSON.parse(decodeURIComponent(escape(atob(_base64))));
 
         return _base64;
@@ -765,7 +765,7 @@ export class CoreUtilities {
             _param += (_param != "" ? "," : "") + el.name + ' : "' + el.value + '"';
         }
 
-        eval('_param = { ' + _param + ' }');
+        _param = JSON.parse("{" + _param + "}");
 
         return _param;
     };
@@ -913,7 +913,7 @@ export class CoreUtilities {
                 swal.fire({
                     title: ptitle,
                     html: '<div style="float:left;width:100%;max-height:200px;overflow:auto;font-size:15px;' + (style !== undefined && style !== null && style !== "" ? style : '') + '">' + pmessage + '</div>',
-                    icon: 'question',
+                    type: 'question',
                     // confirmButtonColor: '#3085d6',
                     // cancelButtonColor: '#d33',
                     confirmButtonText: '<i class="fa fa-check"></i> Evet',
@@ -941,7 +941,7 @@ export class CoreUtilities {
                 swal.fire({
                     title: ptitle,
                     html: '<div style="float:left; width:100%; max-height:200px; overflow:auto; font-size:15px; ' + (style !== undefined && style !== null && style !== "" ? style : '') + '">' + pmessage + '</div>',
-                    icon: ptype,
+                    type: ptype,
                     confirmButtonText: 'Tamam',
                     // confirmButtonClass: 'swalbtn btn btn-success'
                 }).then(function (result) {
@@ -1279,20 +1279,32 @@ export class CoreUtilities {
         if (secinizVL !== undefined && secinizVL !== null && secinizVL != "") {
             rv = "<option value='" + secinizVL + "'>" + secinizTX + "</option>";
         }
-        if (arr !== undefined && arr !== null && arr.length > 0) {
-            var vl = "";
-            var tx = "";
-            var subtx = "";
-            for (var i = 0; i < arr.length; i++) {
-                eval("vl = arr[i]." + valueMember + ".toString();");
-                eval("tx = arr[i]." + textMember + ".toString();");
-                if (datasubtext !== undefined && datasubtext !== null)
-                    eval("subtx = arr[i]." + datasubtext + ".toString();");
-                rv += '<option value="' + vl + '" ' +
-                    (subtx !== '' ? 'data-subtext="' + (datasubtext_baslik !== undefined ? datasubtext_baslik : "") + subtx + '"' : '') +
-                    ((selectedValue === undefined && selectedValue !== null && i === 0) || (selectedValue !== undefined && selectedValue !== null && vl.toString() === selectedValue.toString()) ? ' selected="true"' : '') + '>' + tx + '</option>';
+        try {
+            if (arr !== undefined && arr !== null && arr.length > 0) {
+                var vl = "";
+                var tx = "";
+                var subtx = "";
+                for (var i = 0; i < arr.length; i++) {
+                    for (const [key, value] of Object.entries(arr[i])) {
+                        if (textMember == key) tx = value;
+                        if (valueMember == key) vl = value;
+                    }
+
+                    if (datasubtext !== undefined && datasubtext !== null) {
+                        for (const [key, value] of Object.entries(arr[i])) {
+                            if (datasubtext == key) subtx = value;
+                        }
+                    }
+
+                    rv += '<option value="' + vl + '" ' +
+                        (subtx !== '' ? 'data-subtext="' + (datasubtext_baslik !== undefined ? datasubtext_baslik : "") + subtx + '"' : '') +
+                        ((selectedValue === undefined && selectedValue !== null && i === 0) || (selectedValue !== undefined && selectedValue !== null && vl.toString() === selectedValue.toString()) ? ' selected="true"' : '') + '>' + tx + '</option>';
+                }
             }
+        } catch (error) {
+            console.error(error);
         }
+
         return rv;
     };
 

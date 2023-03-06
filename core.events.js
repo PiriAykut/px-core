@@ -60,30 +60,6 @@ export class CoreEvents {
                 if ($(this).attr("readonly") != undefined || $(this).attr("disabled") != undefined) {
                     $(this).datetimepicker('destroy');
                 }
-            }).on("click", "[data-ng-click]", function () {
-                if ($(this).attr("data-ng-click") !== undefined)
-                    eval($(this).attr("data-ng-click"));
-            }).on("click", "[data-click]", function () {
-                if ($(this).attr("data-click") !== undefined)
-                    eval($(this).attr("data-click"));
-            }).on("dblclick", "[data-ng-dblclick]", function () {
-                if ($(this).attr("data-ng-dblclick") !== undefined)
-                    eval($(this).attr("data-ng-dblclick"));
-            }).on("dblclick", "[data-dblclick]", function () {
-                if ($(this).attr("data-dblclick") !== undefined)
-                    eval($(this).attr("data-dblclick"));
-            }).on("change", "[data-change]", function () {
-                if ($(this).attr("data-change") !== undefined)
-                    eval($(this).attr("data-change"));
-            }).on("change", "[data-ng-change]", function () {
-                if ($(this).attr("data-ng-change") !== undefined)
-                    eval($(this).attr("data-ng-change"));
-            }).on("keyup", "[data-keyup]", function (e) {
-                if ($(this).attr("data-keyup") !== undefined && core.u.YasakliKey().indexOf("," + e.which + ",") === -1)
-                    eval($(this).attr("data-keyup"));
-            }).on("keyup", "[data-ng-keyup]", function (e) {
-                if ($(this).attr("data-ng-keyup") !== undefined && core.u.YasakliKey().indexOf("," + e.which + ",") === -1)
-                    eval($(this).attr("data-ng-keyup"));
             }).on("focus", ".focus-select-text", function () {
                 if ($(this).val().length > 0)
                     $(this).select();

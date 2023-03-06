@@ -35,30 +35,42 @@ export class CoreJSON {
             }
         }
 
+
+
         if (arrCriteria.length > 0 && arr !== undefined && arr !== null && arr.length > 0) {
-            var kriter = "";
-            var status = true;
-            
-            for (var i = 0; i < arrCriteria.length; i++) {
-                eval('status = arr[0].' + arrCriteria[i][0] + '!==undefined');
-                if (!status) {
-                    core.u.alert('Uyarı', 'Filtre için gönderilen alan dizi içerisinde mevcut değil!<br/><br/><b>Alan Adı : </b>' + arrCriteria[i][0], 'error');
-                    return null;
-                }
+            rv = arr.arrfilter(field, value, operator, logicaloperator);
 
-                // kriter += (kriter !== "" ? " && " : "") +
-                // '(' + 
-                // '   ($.type(i).toString() == "object" && ' + (arrCriteria[i][1] == null ? 'i.' + arrCriteria[i][0] + operator + 'null' : 'i.' + arrCriteria[i][0] + '!==null && i.' + arrCriteria[i][0] + '.toString() ' + operator + ' "' + arrCriteria[i][1] + '"') + ') || ' +
-                // '   ($.type(i).toString() == "object" && ' + (arrCriteria[i][1] == null ? '0=0' : 'i.' + arrCriteria[i][0] + '!==null && i.' + arrCriteria[i][0] + '.toString().indexOf("' + arrCriteria[i][1] + '") > -1') + ') || ' +
-                // '   ($.type(n).toString() == "object" && ' + (arrCriteria[i][1] == null ? 'n.' + arrCriteria[i][0] + operator + 'null' : 'n.' + arrCriteria[i][0] + '!==null && n.' + arrCriteria[i][0] + '.toString() ' + operator + '"' + arrCriteria[i][1] + '"') + ') || ' + 
-                // '   ($.type(n).toString() == "object" && ' + (arrCriteria[i][1] == null ? '0=0' : 'n.' + arrCriteria[i][0] + '!==null && n.' + arrCriteria[i][0] + '.toString().indexOf("' + arrCriteria[i][1] + '") > -1') + ') ' + 
-                // ')';
 
-                kriter += (kriter !== "" ? " " + arrCriteria[i][2] + " " : "") +
-                    '(($.type(i).toString() == "object" && ' + (arrCriteria[i][1] == null ? 'i.' + arrCriteria[i][0] + operator + 'null' : 'i.' + arrCriteria[i][0] + '!==null && i.' + arrCriteria[i][0] + '.toString() ' + operator + ' "' + arrCriteria[i][1] + '"') + ') || ' +
-                    ' ($.type(n).toString() == "object" && ' + (arrCriteria[i][1] == null ? 'n.' + arrCriteria[i][0] + operator + 'null' : 'n.' + arrCriteria[i][0] + '!==null && n.' + arrCriteria[i][0] + '.toString() ' + operator + '"' + arrCriteria[i][1] + '"') + '))';
-            }
-            eval('rv = arr.filter(function (i, n) { return (' + kriter + ')});');
+            // var kriter = "";
+            // var status = true;
+
+            // for (var i = 0; i < arrCriteria.length; i++) {
+            //     let _vl = null;
+
+            //     for (const [key, value] of Object.entries(i)) {
+            //         if (arrCriteria[i][0] == key) _vl = value;
+            //     }
+            //     status = _vl !== undefined;
+
+            //     if (!status) {
+            //         core.u.alert('Uyarı', 'Filtre için gönderilen alan dizi içerisinde mevcut değil!<br/><br/><b>Alan Adı : </b>' + arrCriteria[i][0], 'error');
+            //         return null;
+            //     }
+
+            //     // kriter += (kriter !== "" ? " && " : "") +
+            //     // '(' + 
+            //     // '   ($.type(i).toString() == "object" && ' + (arrCriteria[i][1] == null ? 'i.' + arrCriteria[i][0] + operator + 'null' : 'i.' + arrCriteria[i][0] + '!==null && i.' + arrCriteria[i][0] + '.toString() ' + operator + ' "' + arrCriteria[i][1] + '"') + ') || ' +
+            //     // '   ($.type(i).toString() == "object" && ' + (arrCriteria[i][1] == null ? '0=0' : 'i.' + arrCriteria[i][0] + '!==null && i.' + arrCriteria[i][0] + '.toString().indexOf("' + arrCriteria[i][1] + '") > -1') + ') || ' +
+            //     // '   ($.type(n).toString() == "object" && ' + (arrCriteria[i][1] == null ? 'n.' + arrCriteria[i][0] + operator + 'null' : 'n.' + arrCriteria[i][0] + '!==null && n.' + arrCriteria[i][0] + '.toString() ' + operator + '"' + arrCriteria[i][1] + '"') + ') || ' + 
+            //     // '   ($.type(n).toString() == "object" && ' + (arrCriteria[i][1] == null ? '0=0' : 'n.' + arrCriteria[i][0] + '!==null && n.' + arrCriteria[i][0] + '.toString().indexOf("' + arrCriteria[i][1] + '") > -1') + ') ' + 
+            //     // ')';
+
+            //     kriter += (kriter !== "" ? " " + arrCriteria[i][2] + " " : "") +
+            //         '(($.type(i).toString() == "object" && ' + (arrCriteria[i][1] == null ? 'i.' + arrCriteria[i][0] + operator + 'null' : 'i.' + arrCriteria[i][0] + '!==null && i.' + arrCriteria[i][0] + '.toString() ' + operator + ' "' + arrCriteria[i][1] + '"') + ') || ' +
+            //         ' ($.type(n).toString() == "object" && ' + (arrCriteria[i][1] == null ? 'n.' + arrCriteria[i][0] + operator + 'null' : 'n.' + arrCriteria[i][0] + '!==null && n.' + arrCriteria[i][0] + '.toString() ' + operator + '"' + arrCriteria[i][1] + '"') + '))';
+            // }
+
+            // e_v_a_l('rv = arr.filter(function (i, n) { return (' + kriter + ')});');
         }
         return rv;
     };
@@ -69,7 +81,7 @@ export class CoreJSON {
         if (jsondata === undefined || jsondata === null || jsondata.length === 0) {
             return jsondata;
         } else {
-            return jsondata.sort(function(a, b) {
+            return jsondata.sort(function (a, b) {
                 if (asc) {
                     return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
                 } else {
@@ -96,15 +108,30 @@ export class CoreJSON {
         }
 
         var isOk = false;
-        var kriter = "";
+        // var kriter = "";
 
-        for (var i = 0; i < arrCriteria.length; i++) {
-            kriter += (kriter != "" ? " && " : "") + 'item.' + arrCriteria[i][0] + operator + '"' + arrCriteria[i][1] + '"';
-        }
+        // for (var i = 0; i < arrCriteria.length; i++) {
+        //     kriter += (kriter != "" ? " && " : "") + 'item.' + arrCriteria[i][0] + operator + '"' + arrCriteria[i][1] + '"';
+        // }
 
-        jsondata.find(function(item, indx) {
+        jsondata.find(function (item, indx) {
             if (item != undefined && item != null) {
-                eval('isOk = ' + kriter + ';');
+                //e_v_a_l('isOk = ' + kriter + ';');
+                for (const [key, value] of Object.entries(item)) {
+                    if (arrCriteria[i][0] == key) _vl = value;
+                }
+
+                switch (operator.trim()) {
+                    case "==":
+                    case "===":
+                        isOk = (_vl.toString() == arrCriteria[i][1]);
+                        break;
+                    case "!=":
+                    case "!==":
+                        isOk = (_vl.toString() != arrCriteria[i][1]);
+                        break;
+                }
+
                 if (isOk) {
                     jsondata.splice(indx, 1);
                 }

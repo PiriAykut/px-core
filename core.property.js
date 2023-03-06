@@ -98,13 +98,13 @@ Array.prototype.removeValue = function (name, value) {
     return (oldLen > this.length); //true or false
 }
 
-Array.prototype.arrfilter = function (field, value, operator, operation) {
+Array.prototype.arrfilter = function (field, value, operator, logicaloperator) {
     var rv = null;
     var arr = this;
 
     var arrCriteria = [];
 
-    if (operation === undefined) operation = " && ";
+    if (logicaloperator === undefined) logicaloperator = " && ";
 
     if (operator === undefined || operator == null) {
         operator = '===';
@@ -122,11 +122,53 @@ Array.prototype.arrfilter = function (field, value, operator, operation) {
         }
     }
     if (arrCriteria.length > 0 && arr !== undefined && arr !== null && arr.length > 0) {
-        var kriter = "";
-        for (var i = 0; i < arrCriteria.length; i++) {
-            kriter += (kriter !== "" ? operation : "") + '(($.type(i).toString() == "object" && i.' + arrCriteria[i][0] + '!==null && i.' + arrCriteria[i][0] + '.toString() ' + operator + ' "' + arrCriteria[i][1] + '") || ($.type(n).toString() == "object" && n.' + arrCriteria[i][0] + '!==null && n.' + arrCriteria[i][0] + '.toString() ' + operator + ' "' + arrCriteria[i][1] + '"))';
-        }
-        eval('rv = arr.filter(function (i, n) { return (' + kriter + ')});');
+        rv = arr.filter(function (i, n) {
+            let _status = false;
+            for (var i = 0; i < arrCriteria.length; i++) {
+                let _i_status = false;
+                let _vl = null;
+
+                if ($.type(i).toString() == "object") {
+                    for (const [key, value] of Object.entries(i)) {
+                        if (arrCriteria[i][0] == key) _vl = value;
+                    }
+                } else if ($.type(n).toString() == "object") {
+                    for (const [key, value] of Object.entries(n)) {
+                        if (arrCriteria[i][0] == key) _vl = value;
+                    }
+                }
+
+                _i_status = _vl != null;
+                if (_i_status) {
+                    switch (operator.trim()) {
+                        case "==":
+                        case "===":
+                            _i_status = (_vl.toString() == arrCriteria[i][1]);
+                            break;
+                        case "!=":
+                        case "!==":
+                            _i_status = (_vl.toString() != arrCriteria[i][1]);
+                            break;
+                    }
+                }
+
+                if (logicaloperator.trim() == "&&") {
+                    _status = _i_status;
+
+                    if (!_status) return false;
+                } else {
+                    if (_status) return true;
+                }
+            }
+
+            return _status;
+        });
+
+        // var kriter = "";
+        // for (var i = 0; i < arrCriteria.length; i++) {
+        //     kriter += (kriter !== "" ? logicaloperator : "") + '(($.type(i).toString() == "object" && i.' + arrCriteria[i][0] + '!==null && i.' + arrCriteria[i][0] + '.toString() ' + operator + ' "' + arrCriteria[i][1] + '") || ($.type(n).toString() == "object" && n.' + arrCriteria[i][0] + '!==null && n.' + arrCriteria[i][0] + '.toString() ' + operator + ' "' + arrCriteria[i][1] + '"))';
+        // }
+        // e_v_a_l('rv = arr.filter(function (i, n) { return (' + kriter + ')});');
     }
     return rv;
 }
@@ -179,7 +221,7 @@ Array.prototype.distinct = function (_valueArr, _criteriaField) {
 
     let rv = null;
 
-    eval('rv = Array.from(new Set(this.map(s => s.' + _criteriaField + '))).map(' + _criteriaField + ' => {return { ' + fields + ' }; }); ');
+    // e_v_a_l('rv = Array.from(new Set(this.map(s => s.' + _criteriaField + '))).map(' + _criteriaField + ' => {return { ' + fields + ' }; }); ');
 
     return rv;
 };
