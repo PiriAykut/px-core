@@ -297,7 +297,6 @@ export class CoreEvents {
                                 // }
                             });
 
-                            $(_target).removeAttr('data-lazy');
                         } else {
                             switch ($(_target).attr('data-lazy')) {
                                 case "number":
@@ -311,12 +310,20 @@ export class CoreEvents {
                                         $(_target).attr("onerror", core.u.image_error_attr())
                                     }
 
-                                    $(_target).attr('src', $(_target).attr('data-lazy'));
+                                    if ($(_target).attr("data-src")) {
+                                        $(_target).attr('src', $(_target).attr("data-src"));
+
+                                        $(_target).removeAttr('data-src')
+                                    } else {
+                                        $(_target).attr('src', $(_target).attr('data-lazy'));
+                                    }
+
                                     break;
                             }
 
-                            $(_target).removeAttr('data-lazy')
                         }
+
+                        $(_target).removeAttr('data-lazy')
 
                         observer.disconnect();
                     }
