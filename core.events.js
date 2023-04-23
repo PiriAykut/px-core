@@ -318,6 +318,8 @@ export class CoreEvents {
                                         $(_target).attr('src', $(_target).attr('data-lazy'));
                                     }
 
+                                    $(_target).attr('onload', 'core.u.image_load(this)');
+
                                     break;
                             }
 

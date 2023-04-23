@@ -254,6 +254,9 @@ export class CoreUtilities {
                 return 'this.onerror=null; $(this).attr(\'data-error-image\', this.src); this.src=\'/images/default-image.jpg\';';
         }
     }
+    image_load(el) {
+        $(el).removeAttr("onload").removeAttr("onerror").removeAttr("data-error-path");
+    }
     error_image(img, defaultimg) {
         $(img).onerror = null;
 
