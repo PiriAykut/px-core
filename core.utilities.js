@@ -1283,6 +1283,26 @@ export class CoreUtilities {
             rv = "<option value='" + secinizVL + "'>" + secinizTX + "</option>";
         }
         try {
+            let _options = arr.map(row => {
+                let vl = '';
+                let tx = '';
+                let selected = '';
+
+                for (const [key, value] of Object.entries(row)) {
+                    if (textMember == key) tx = value;
+                    if (valueMember == key) vl = value;
+                    if (vl != '' && tx != '') break;
+                }
+
+                if (selectedValue !== undefined && selectedValue !== null && selectedValue.toString() == vl.toString()) {
+                    selected = 'selected="true"';
+                }
+
+                return `<option value="${vl}" ${selected}>${tx}</option>`;
+            }).join();
+
+            return _options;
+
             if (arr !== undefined && arr !== null && arr.length > 0) {
                 var vl = "";
                 var tx = "";
