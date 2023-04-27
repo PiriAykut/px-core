@@ -225,3 +225,11 @@ Array.prototype.distinct = function (_valueArr, _criteriaField) {
 
     return rv;
 };
+
+String.prototype.isNumeric = function () {
+    let str = this.toString();
+
+    if (typeof str != "string") return false;
+
+    return !isNaN(str) && !isNaN(parseFloat(str));
+};
