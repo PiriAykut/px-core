@@ -19,7 +19,7 @@
 > @import "toastr"; //vite <br>
 > @import "~toastr"; //mix <br>
 
-### use
+## use
 
 > - core.run("request_url", {params}, { form: "#formid or class - optional", waittext: "message to show until ajax result comes" }, function(e, err){ //e = data block returned as ajax result }); <br>
 > - let filterdata = core.json.filter(jsonarray, fieldname, value); //core.json.sort() -- core.json.remove() <br>
@@ -27,7 +27,7 @@
 > - core.u.{ many methods } <br>
 
 
-### description
+## description
 >px-core is a suite of tools that includes a feature.<br/>
 ><br/>
 >core.js simplifies your ajax operations and is short-lived. You can use it with core.run.<br/>
@@ -43,7 +43,7 @@
 >core.json adds additional features to your sorting and searching operations in your json data. core.j.filter, core.j.sort, core.j.remove, core.j.distinct<br/><br/>
 
 
-### description TR
+## description TR
 >px-core bir özelliği içinde barındıran bir araç paketidir. <br/><br/>
 >
 >core.js ajax işlemlerinizi kolaylaştırır ve kısa kullanım olanağı sonunar. core.run ile kullanabilirsiniz.<br/><br/>
