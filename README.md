@@ -30,7 +30,7 @@
 ## description
 >px-core is a suite of tools that includes a feature.<br/>
 ><br/>
->core.js simplifies your ajax operations and is short-lived. You can use it with core.run.<br/>
+>core.js simplifies your ajax operations and is short. You can use it with core.run.<br/>
 ><br/>
 >core.utilities simplifies many javascript operations as a single use. core.u. You can use it with (methods).<br/>
 ><br/>
