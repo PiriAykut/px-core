@@ -887,10 +887,16 @@ export class CoreUtilities {
                 return _type + ' Dosyası';
                 break;
         }
-    };
+    }
+
     isnull(obj) {
         return (obj === undefined || obj === null);
-    };
+    }
+
+    ifnull(obj, _default = null) {
+        return !this.isnull(obj) ? obj : _default
+    }
+
     convertToInt(nmdata) {
         nmdata = nmdata.trim();
         if (nmdata === "" || this.isnumeric(nmdata) === false)
@@ -1301,7 +1307,7 @@ export class CoreUtilities {
                 return `<option value="${vl}" ${selected}>${tx}</option>`;
             }).join();
 
-            return _options;
+            return rv + _options;
 
             if (arr !== undefined && arr !== null && arr.length > 0) {
                 var vl = "";
