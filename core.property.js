@@ -234,24 +234,24 @@ String.prototype.isNumeric = function () {
     return !isNaN(str) && !isNaN(parseFloat(str));
 };
 
-Object.prototype.serializeObject = function () {
-    var unindexed_array = this.serializeArray();
-    var indexed_array = {};
+// Object.prototype.serializeObject = function () {
+//     var unindexed_array = this.serializeArray();
+//     var indexed_array = {};
 
-    $.map(unindexed_array, function (n, i) {
-        indexed_array[n['name']] = n['value'];
-    });
+//     $.map(unindexed_array, function (n, i) {
+//         indexed_array[n['name']] = n['value'];
+//     });
 
-    return indexed_array;
-};
+//     return indexed_array;
+// };
 
-Object.prototype.serializeJSON = function () {
-    var unindexed_array = this.serializeArray();
-    var indexed_array = {};
+// Object.prototype.serializeJSON = function () {
+//     var unindexed_array = this.serializeArray();
+//     var indexed_array = {};
 
-    $.map(unindexed_array, function (n, i) {
-        indexed_array[n['name']] = n['value'];
-    });
+//     $.map(unindexed_array, function (n, i) {
+//         indexed_array[n['name']] = n['value'];
+//     });
 
-    return indexed_array;
-};
+//     return indexed_array;
+// };
