@@ -82,7 +82,15 @@ export class CoreUtilities {
 
             if (_name == "mail") {
                 if (!core.u.validateEmail($(_obj).val().trim())) {
-                    core.u.alert(t("Uyarı"), t("E-Posta Adresiniz hatalı!") + "<br/>" + t("Lütfen kontrol edip tekrar deneyin."), "warning", function () {
+                    let _title = "E-Posta Adresiniz hatalı!";
+                    let _message = "Lütfen kontrol edip tekrar deneyin.";
+
+                    if (typeof t !== "undefined") {
+                        _title = t(_title);
+                        _message = t(_message)
+                    }
+
+                    core.u.alert(t("Uyarı"), _title + "<br/>" + _message, "warning", function () {
                         setTimeout(() => {
                             $(_obj).focus();
                         }, 500);
@@ -460,6 +468,11 @@ export class CoreUtilities {
         }
         return '#' + renk;
     };
+
+    mailcontrol(email) {
+        return core.u.validateEmail(email);
+    }
+
     validateEmail(email) {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(String(email).toLowerCase());
@@ -554,6 +567,14 @@ export class CoreUtilities {
         $(mdl + ".is-invalid").removeClass('is-invalid');
 
         if ($(mdl + "[required]").length > 0) {
+            let _m1 = "E-Posta adresi hatalı!";
+            let _m2 = "(*) ile işaretlenmiş alanları doldurmalısınız!";
+
+            if (typeof t !== "undefined") {
+                _m1 = t(_m1);
+                _m2 = t(_m2)
+            }
+
             $(mdl + "[required]").each(function () {
                 let invalid = false;
 
@@ -566,7 +587,7 @@ export class CoreUtilities {
                             invalid = (type == 'mail' && !core.u.validateEmail($(this).val()));
 
                             if (invalid && _showmessege) {
-                                core.u.toastAlert(t("Uyarı"), t("E-Posta adresi hatalı!"), "warning", 8000);
+                                core.u.toastAlert(t("Uyarı"), _m1, "warning", 8000);
                             }
                         }
                         break;
@@ -585,7 +606,7 @@ export class CoreUtilities {
 
             if ($(mdl + ".is-invalid").length > 0) {
                 if (_showmessege)
-                    this.toastAlert("Uyarı", t("(*) ile işaretlenmiş alanları doldurmalısınız!"), "warning", 8000);
+                    this.toastAlert("Uyarı", _m2, "warning", 8000);
 
                 return false;
             } else {
@@ -1201,6 +1222,19 @@ export class CoreUtilities {
         var GUNTEXT = 0;
         var GUNKALAN = 0;
         var RV = "";
+
+        let _myil = "Yıl";
+        let _may = "Ay";
+        let _mgun = "Gün";
+        let _mbugun = "Bugün";
+
+        if (typeof t !== "undefined") {
+            _myil = t(_myil);
+            _may = t(_may);
+            _mgun = t(_mgun);
+            _mbugun = t(_mbugun)
+        }
+
         if (YILSONUC >= 1) {
             YILTEXT = Math.floor(YILSONUC);
             YILKALAN = YILSONUC - Math.floor(YILSONUC);
@@ -1230,16 +1264,16 @@ export class CoreUtilities {
             GUNTEXT = 0;
         }
         if (YILTEXT > 0) {
-            RV = YILTEXT + ' ' + t('Yıl');
+            RV = YILTEXT + ' ' + _myil;
         }
         if (AYTEXT > 0) {
-            RV = (RV !== '' ? RV + ' ' : '') + AYTEXT + ' ' + t('Ay');
+            RV = (RV !== '' ? RV + ' ' : '') + AYTEXT + ' ' + _may;
         }
         if (GUNTEXT > 0) {
-            RV = (RV !== '' ? RV + ' ' : '') + GUNTEXT + ' ' + t('Gün');
+            RV = (RV !== '' ? RV + ' ' : '') + GUNTEXT + ' ' + _mgun;
         }
         if (RV === '') {
-            RV = t('Bugün');
+            RV = _mbugun;
         }
         return RV;
     };
@@ -1276,11 +1310,21 @@ export class CoreUtilities {
     };
     getMonthName(monthNm) {
         var arr = ["Ocak", "Şubat", "Mart", "Nisan", "Mayıs", "Haziran", "Temmuz", "Ağustos", "Eylül", "Ekim", "Kasım", "Aralık"];
-        return t(arr[monthNm - 1]);
+
+        if (typeof t !== "undefined") {
+            return t(arr[monthNm - 1]);
+        } else {
+            return arr[monthNm - 1];
+        }
     };
     getDayName(dayNm) {
         var arr = ["Pazar", "Pazartesi", "Salı", "Çarşamba", "Perşembe", "Cuma", "Cumartesi"];
-        return t(arr[dayNm]);
+
+        if (typeof t !== "undefined") {
+            return t(arr[dayNm]);
+        } else {
+            return arr[dayNm];
+        }
     };
     adddays(date, days, isformat) {
         let copy = new Date(Number(date))
