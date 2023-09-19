@@ -1625,4 +1625,30 @@ export class CoreUtilities {
         }
         return color;
     }
+
+    base64en(_strdata, _json = true) {
+        let rv = null;
+        try {
+            if (_json) {
+                _strdata = JSON.stringify(_strdata);
+            }
+
+            rv = btoa(unescape(encodeURIComponent(_strdata)));
+        } catch (e) {
+        }
+        return rv;
+    }
+    base64de(_cryptStr, _json = true) {
+        let rv = null;
+        try {
+            rv = decodeURIComponent(escape(atob(_cryptStr)));
+
+            if (_json) {
+                rv = JSON.parse(rv);
+            }
+        } catch (e) {
+        }
+
+        return rv;
+    }
 }
