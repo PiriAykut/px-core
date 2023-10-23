@@ -442,7 +442,7 @@ export class Core {
 
         if (options.waittext !== "") {
             //canceltimeout: ((options.timeout / 1000) * (options.timeout_rerun ? 2 : 1)),
-            pxwait.show({ message: options.waittext, panelshow: false, /*spinlevel: '3',*/  ajaxobj: AJX });
+            pxwait.show({ message: options.waittext, panelshow: false, spinlevel: '3', ajaxobj: AJX });
         }
     };
 
