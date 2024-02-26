@@ -52,6 +52,10 @@ export class CoreUtilities {
         return _text.charAt(0).toLocaleUpperCase('tr-TR') + _text.slice(1);
     }
 
+    ucWordsUpper(_text) {
+        return _text.split(" ").map(_e => { return _e.trim().length > 1 ? _e.trim().charAt(0).toLocaleUpperCase('tr-TR') + _e.slice(1).toLocaleLowerCase('tr-TR') : _e.trim(); }).join(' ');
+    }
+
     validate_object(_name, _message, _controlValue = "", _owner = null) {
         let _obj = null;
         if (_owner != null) {
