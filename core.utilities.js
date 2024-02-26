@@ -59,7 +59,7 @@ export class CoreUtilities {
             _rv = _rv.filter(_e => { return _e != ''; });
         }
 
-        return rv.join(' ');
+        return _rv.join(' ');
     }
 
     validate_object(_name, _message, _controlValue = "", _owner = null) {
