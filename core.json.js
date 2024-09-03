@@ -58,11 +58,11 @@ export class CoreJSON {
             //     }
 
             //     // kriter += (kriter !== "" ? " && " : "") +
-            //     // '(' + 
+            //     // '(' +
             //     // '   ($.type(i).toString() == "object" && ' + (arrCriteria[i][1] == null ? 'i.' + arrCriteria[i][0] + operator + 'null' : 'i.' + arrCriteria[i][0] + '!==null && i.' + arrCriteria[i][0] + '.toString() ' + operator + ' "' + arrCriteria[i][1] + '"') + ') || ' +
             //     // '   ($.type(i).toString() == "object" && ' + (arrCriteria[i][1] == null ? '0=0' : 'i.' + arrCriteria[i][0] + '!==null && i.' + arrCriteria[i][0] + '.toString().indexOf("' + arrCriteria[i][1] + '") > -1') + ') || ' +
-            //     // '   ($.type(n).toString() == "object" && ' + (arrCriteria[i][1] == null ? 'n.' + arrCriteria[i][0] + operator + 'null' : 'n.' + arrCriteria[i][0] + '!==null && n.' + arrCriteria[i][0] + '.toString() ' + operator + '"' + arrCriteria[i][1] + '"') + ') || ' + 
-            //     // '   ($.type(n).toString() == "object" && ' + (arrCriteria[i][1] == null ? '0=0' : 'n.' + arrCriteria[i][0] + '!==null && n.' + arrCriteria[i][0] + '.toString().indexOf("' + arrCriteria[i][1] + '") > -1') + ') ' + 
+            //     // '   ($.type(n).toString() == "object" && ' + (arrCriteria[i][1] == null ? 'n.' + arrCriteria[i][0] + operator + 'null' : 'n.' + arrCriteria[i][0] + '!==null && n.' + arrCriteria[i][0] + '.toString() ' + operator + '"' + arrCriteria[i][1] + '"') + ') || ' +
+            //     // '   ($.type(n).toString() == "object" && ' + (arrCriteria[i][1] == null ? '0=0' : 'n.' + arrCriteria[i][0] + '!==null && n.' + arrCriteria[i][0] + '.toString().indexOf("' + arrCriteria[i][1] + '") > -1') + ') ' +
             //     // ')';
 
             //     kriter += (kriter !== "" ? " " + arrCriteria[i][2] + " " : "") +
@@ -142,8 +142,8 @@ export class CoreJSON {
         });
     };
 
-    /* 
-    Array.from(new Set(e.obj.muayene.map(s => s.ICD10_ID))).map(ICD10_ID => { return {ICD10_ID: ICD10_ID, AD: e.obj.muayene.find(s => s.ICD10_ID === ICD10_ID).AD}; }); 
+    /*
+    Array.from(new Set(e.obj.muayene.map(s => s.ICD10_ID))).map(ICD10_ID => { return {ICD10_ID: ICD10_ID, AD: e.obj.muayene.find(s => s.ICD10_ID === ICD10_ID).AD}; });
     */
     distinct(_jsondata, _valueArr, _criteriaField) {
         //core.property de
