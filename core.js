@@ -143,7 +143,7 @@ export class Core {
 
         if (_options != undefined && _callback != undefined) {
             if (_parametters){
-                if (!_options.param) {
+                if (_options.param) {
                     _options.param = { ..._parametters, ..._options.param };
                 } else {
                     _options.param = _parametters;
