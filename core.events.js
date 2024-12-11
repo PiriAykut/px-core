@@ -74,12 +74,12 @@ export class CoreEvents {
             }).on("input", ".upper", function (e) {
                 //sadece küçük harflerde çalış
                 //if ((e.which >= 97 && e.which <= 122) || (e.which >= 65 && e.which <= 90) || "ç,ş,ğ,ü,ö,i,ə,".indexOf(e.key + ",") > -1) {
-                $(this).val($(this).val().toTrUpperCase());
+                $(this).val($(this).val().toLocaleUpperCase("tr"));
                 //}
             }).on("input", ".lower", function (e) {
                 //sadece küçük harflerde çalış
                 //if ((e.keyCode >= 97 && e.keyCode <= 122) || (e.keyCode >= 65 && e.keyCode <= 90) || "Ç,Ş,Ğ,Ü,Ö,İ,Ə,".indexOf(e.key + ",") > -1) {
-                $(this).val($(this).val().toTrLowerCase());
+                $(this).val($(this).val().toLocaleLowerCase('tr'));
                 //}
             }).on("change", ".moneyonly", function () {
                 var dHane = $(this).attr("decimalcount");

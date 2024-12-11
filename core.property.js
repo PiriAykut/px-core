@@ -1,4 +1,4 @@
-/* 
+/*
     core.property
     20.08.2022
     Piri AYKUT - piriaykut@gmail.com
@@ -15,7 +15,7 @@ String.prototype.toFirstUpperLastLower = function () {
     var s = this.split(" ");
     var rv = "";
     for (var i = 0; i < s.length; i++) {
-        rv += (rv != "" ? " " : "") + s[i].charAt(0).toTrUpperCase() + s[i].slice(1).toTrLowerCase();
+        rv += (rv != "" ? " " : "") + s[i].charAt(0).toLocaleUpperCase("tr") + s[i].slice(1).toLocaleLowerCase("tr");
     }
 
     return rv;
@@ -24,18 +24,22 @@ String.prototype.toFirstUpperLastLower = function () {
 String.prototype.toFirstUpperCase = function () {
     //     if((typeof this)!=='string')
     //        return this;>
-    return this.charAt(0).toTrUpperCase() + this.slice(1);
+    $(this).val($(this).val().toLocaleUpperCase("tr"));
+
+    return this.charAt(0).toLocaleUpperCase("tr") + this.slice(1);
 };
 
 String.prototype.toFirstLowerCase = function () {
     //     if((typeof this)!=='string')
     //        return this;
-    return this.charAt(0).toTrLowerCase() + this.slice(1);
+    return this.charAt(0).toLocaleLowerCase("tr") + this.slice(1);
 };
 
 String.prototype.toTrUpperCase = function () {
     //     if((typeof this)!=='string')
     //        return this;
+    return this.toLocaleUpperCase("tr");
+
     var str = [];
     for (var i = 0; i < this.length; i++) {
         var ch = this.charCodeAt(i);
@@ -59,6 +63,9 @@ String.prototype.toTrUpperCase = function () {
 String.prototype.toTrLowerCase = function () {
     //     if((typeof this)!=='string')
     //        return this;
+
+    return this.toLocaleLowerCase("tr");
+
     var str = [];
     for (var i = 0; i < this.length; i++) {
         var ch = this.charCodeAt(i);
@@ -81,7 +88,7 @@ String.prototype.toTrLowerCase = function () {
 };
 String.prototype.replaceAll = function (search, replacement) {
     //     if((typeof this)!=='string')
-    //      
+    //
     //          return this;
     var target = this;
     return target.split(search).join(replacement);
@@ -202,8 +209,8 @@ Array.prototype.remove = function (field, value, callback, operator) {
 };
 
 Array.prototype.distinct = function (_valueArr, _criteriaField) {
-    /* 
-    Array.from(new Set(e.obj.muayene.map(s => s.ICD10_ID))).map(ICD10_ID => { return {ICD10_ID: ICD10_ID, AD: e.obj.muayene.find(s => s.ICD10_ID === ICD10_ID).AD}; }); 
+    /*
+    Array.from(new Set(e.obj.muayene.map(s => s.ICD10_ID))).map(ICD10_ID => { return {ICD10_ID: ICD10_ID, AD: e.obj.muayene.find(s => s.ICD10_ID === ICD10_ID).AD}; });
     */
     let fields = '';
     if (!$.isArray(_valueArr)) {
