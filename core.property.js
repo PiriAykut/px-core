@@ -24,15 +24,15 @@ String.prototype.toFirstUpperLastLower = function () {
 String.prototype.toFirstUpperCase = function () {
     //     if((typeof this)!=='string')
     //        return this;>
-    $(this).val($(this).val().toLocaleUpperCase("tr"));
+    // $(this).val($(this).val().toLocaleUpperCase("tr"));
 
-    return this.charAt(0).toLocaleUpperCase("tr") + this.slice(1);
+    return this.charAt(0).toLocaleUpperCase("tr") + this.slice(1).toLocaleLowerCase("tr");
 };
 
 String.prototype.toFirstLowerCase = function () {
     //     if((typeof this)!=='string')
     //        return this;
-    return this.charAt(0).toLocaleLowerCase("tr") + this.slice(1);
+    return this.charAt(0).toLocaleLowerCase("tr") + this.slice(1).toLocaleLowerCase("tr");
 };
 
 String.prototype.toTrUpperCase = function () {
