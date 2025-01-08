@@ -68,9 +68,7 @@ export class CoreEvents {
             }).on("focus", ".seltext", function (e) {
                 $(this).select();
             }).on("input", ".firstupper", function (e) {
-                if ($(this).val().length == 1) {
-                    $(this).val($(this).val().toFirstUpperCase());
-                }
+                $(this).val($(this).val().toFirstUpperCase());
             }).on("input", ".upper", function (e) {
                 //sadece küçük harflerde çalış
                 //if ((e.which >= 97 && e.which <= 122) || (e.which >= 65 && e.which <= 90) || "ç,ş,ğ,ü,ö,i,ə,".indexOf(e.key + ",") > -1) {
