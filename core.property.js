@@ -25,6 +25,13 @@ String.prototype.toFirstUpperCase = function () {
     //     if((typeof this)!=='string')
     //        return this;>
     // $(this).val($(this).val().toLocaleUpperCase("tr"));
+    let arr = this.split(" ");
+    let rv = "";
+    for (let i = 0; i < arr.length; i++) {
+        rv += (rv != "" ? " " : "") + arr[i].charAt(0).toLocaleUpperCase("tr") + arr[i].slice(1).toLocaleLowerCase("tr");
+    }
+
+    return rv;
 
     return this.charAt(0).toLocaleUpperCase("tr") + this.slice(1).toLocaleLowerCase("tr");
 };
@@ -32,7 +39,14 @@ String.prototype.toFirstUpperCase = function () {
 String.prototype.toFirstLowerCase = function () {
     //     if((typeof this)!=='string')
     //        return this;
-    return this.charAt(0).toLocaleLowerCase("tr") + this.slice(1).toLocaleLowerCase("tr");
+
+    let arr = this.split(" ");
+    let rv = "";
+    for (let i = 0; i < arr.length; i++) {
+        rv += (rv != "" ? " " : "") + arr[i].charAt(0).toLocaleLowerCase("tr") + arr[i].slice(1).toLocaleLowerCase("tr");
+    }
+
+    return rv;
 };
 
 String.prototype.toTrUpperCase = function () {
