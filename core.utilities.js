@@ -801,7 +801,11 @@ export class CoreUtilities {
     }
 
     getFormToJSON(formIDorClass) {
-        let rv = $("#frm_step_date").serializeArray().reduce((acc, item) => {
+        if ($(formIDorClass).length == 0) {
+            return null;
+        }
+
+        let rv = $(formIDorClass).serializeArray().reduce((acc, item) => {
             if (acc[item.name]) {
                 if (!Array.isArray(acc[item.name])) {
                     acc[item.name] = [acc[item.name]];
