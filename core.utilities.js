@@ -801,6 +801,20 @@ export class CoreUtilities {
     }
 
     getFormToJSON(formIDorClass) {
+        let rv = $("#frm_step_date").serializeArray().reduce((acc, item) => {
+            if (acc[item.name]) {
+                if (!Array.isArray(acc[item.name])) {
+                    acc[item.name] = [acc[item.name]];
+                }
+                acc[item.name].push(item.value);
+            } else {
+                acc[item.name] = item.value;
+            }
+            return acc;
+        }, {});
+
+        return rv;
+
         var formdata = $(formIDorClass).serializeArray();
         formdata.push({ name: 'detay', value: app.ilan.editor.getData() });
         var _param = null;
