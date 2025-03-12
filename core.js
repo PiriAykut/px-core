@@ -142,7 +142,7 @@ export class Core {
         }
 
         if (_options != undefined && _callback != undefined) {
-            if (_parametters){
+            if (_parametters) {
                 if (_options.param) {
                     _options.param = { ..._parametters, ..._options.param };
                 } else {
@@ -233,6 +233,8 @@ export class Core {
         if (coreFormData == null) {
             coreFormData = new FormData();
         }
+
+        coreFormData.append("_defaultvariable", "1");
 
         if (options.form !== "" && $(options.form).length > 0) {
             let tempFrm = coreFormData;
