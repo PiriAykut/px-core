@@ -18,6 +18,7 @@
 });
 
 
+
 String.prototype.toFirstUpperLastLower = function () {
     //    if((typeof this)!=='string')
     //        return this;
