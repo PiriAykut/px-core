@@ -5,9 +5,18 @@
     https://www.linkedin.com/in/piri-aykut-ba395b70/
  */
 
-jQuery.fn.tagName = function () {
-    return this.prop("tagName");
-};
+(function waitForjQuery(callback) {
+    if (typeof window.jQuery !== "undefined") {
+        callback();
+    } else {
+        setTimeout(() => waitForjQuery(callback), 50);
+    }
+})(function () {
+    jQuery.fn.tagName = function () {
+        return this.prop("tagName");
+    };
+});
+
 
 String.prototype.toFirstUpperLastLower = function () {
     //    if((typeof this)!=='string')
